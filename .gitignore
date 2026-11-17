@@ -1,0 +1,23 @@
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xccheckout
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# SwiftPM
+.build/
+.swiftpm/
+Package.resolved
+
+# Secrets: never commit API keys (see docs/adr/0004)
+Secrets.xcconfig
+*.secrets.xcconfig
+
+# macOS
+.DS_Store
