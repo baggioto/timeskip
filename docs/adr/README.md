@@ -8,3 +8,4 @@ Short documents that capture one decision each: the context, the decision, and i
 | [0002](0002-tmdb-as-data-source.md) | TMDB as the data source | Accepted |
 | [0003](0003-swiftui-and-swift-6.md) | SwiftUI and Swift 6 strict concurrency | Accepted |
 | [0004](0004-secrets-out-of-git.md) | Keep API secrets out of git | Accepted |
+| [0005](0005-ios-18-and-xcodegen.md) | iOS 18 minimum and an XcodeGen project | Accepted |

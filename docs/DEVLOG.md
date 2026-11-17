@@ -7,4 +7,5 @@ One entry per work session: what was done, what was decided, what's next.
 - Name: **Timeskip**.
 - Wrote the product scope ([PRODUCT.md](PRODUCT.md)), the [roadmap](ROADMAP.md) and the first ADRs.
 - Mockups in [Figma](https://www.figma.com/design/XDV0KDQZaAJM0Gkda3pgAT): 6 screens (Trending, Details, Search, Watchlist, empty watchlist, offline error), 10 color variables (dark theme, amber accent) and 5 base components (PosterCard, ListRow, TabBar, Button/Primary, Chip). Posters are placeholders for TMDB artwork.
-- Next: create the Xcode project (Swift 6, strict concurrency) and the secrets setup from ADR 0004.
+- Created the Xcode project with XcodeGen (iOS 18, Swift 6, MainActor by default): tab shell (Home / Search / Watchlist) with placeholder screens, color tokens mirrored from the Figma variables, TMDB token read from a git-ignored xcconfig via Info.plist, and a first Swift Testing suite (2 tests, green). ADR 0005 records the iOS 18 + XcodeGen decision.
+- Next: GitHub Actions CI (build + test), then the TMDB API client (first v0.1 feature).

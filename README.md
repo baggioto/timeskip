@@ -4,7 +4,7 @@ A movie & TV tracker for iOS: browse what's trending, search, keep a watchlist a
 
 Built in public as a senior-level iOS portfolio project: every feature is a deliberate exercise in modern iOS engineering (SwiftUI, Swift Concurrency, testing, modularization, CI) and every decision is documented.
 
-> **Status:** planning. No app code yet. See the [roadmap](docs/ROADMAP.md) and the [dev log](docs/DEVLOG.md).
+> **Status:** v0.0, foundations. The app builds and runs with placeholder tabs. See the [roadmap](docs/ROADMAP.md) and the [dev log](docs/DEVLOG.md).
 
 ## Planned features (MVP v0.1)
 - Trending movies & shows with infinite scroll
@@ -27,7 +27,7 @@ Later: offline support, episode tracking, widgets, notifications, deep links. Fu
 | CI | GitHub Actions (planned) |
 | Data | [TMDB API](https://developer.themoviedb.org/) |
 
-Minimum target: iOS 18 (to be confirmed in an ADR when the project is created).
+Minimum target: iOS 18 ([ADR 0005](docs/adr/0005-ios-18-and-xcodegen.md)). Project generated with XcodeGen.
 
 ## Documentation
 | Doc | What's in it |
@@ -39,7 +39,26 @@ Minimum target: iOS 18 (to be confirmed in an ADR when the project is created).
 | [Figma: MVP v0.1 screens](https://www.figma.com/design/XDV0KDQZaAJM0Gkda3pgAT) | Screen mockups, color variables and base components |
 
 ## Getting started
-Coming with v0.1. You'll need a free TMDB API read access token in a local `Secrets.xcconfig` (never committed).
+Requirements: Xcode 26+, [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`), a free [TMDB](https://www.themoviedb.org/settings/api) API Read Access Token.
+
+```bash
+cp Config/Secrets.example.xcconfig Config/Secrets.xcconfig   # then paste your token
+xcodegen                                                     # generates Timeskip.xcodeproj
+open Timeskip.xcodeproj
+```
+
+`Secrets.xcconfig` is git-ignored ([ADR 0004](docs/adr/0004-secrets-out-of-git.md)).
+
+## Project structure
+```
+Timeskip/
+  App/            entry point, root tab view
+  Core/           config, networking (soon)
+  DesignSystem/   color tokens mirrored from Figma
+  Features/       Trending, Search, Watchlist (one folder per feature)
+TimeskipTests/    Swift Testing
+Config/           xcconfig files (secrets stay local)
+```
 
 ## Attribution
 <!-- TMDB requires this notice and their logo in the app's About screen -->
