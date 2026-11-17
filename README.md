@@ -36,6 +36,7 @@ Minimum target: iOS 18 (to be confirmed in an ADR when the project is created).
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Milestones and the engineering checklist |
 | [docs/DEVLOG.md](docs/DEVLOG.md) | Dated log of every work session |
 | [docs/adr/](docs/adr/) | Architecture Decision Records |
+| [Figma: MVP v0.1 screens](https://www.figma.com/design/XDV0KDQZaAJM0Gkda3pgAT) | Screen mockups, color variables and base components |
 
 ## Getting started
 Coming with v0.1. You'll need a free TMDB API read access token in a local `Secrets.xcconfig` (never committed).

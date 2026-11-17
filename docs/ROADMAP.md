@@ -4,7 +4,7 @@ Each milestone is small enough to finish. A box is only checked when it's merged
 
 ## v0.0: Foundations
 - [x] Name, scope and docs (2026-11-17)
-- [ ] Screen mockups
+- [x] Screen mockups in [Figma](https://www.figma.com/design/XDV0KDQZaAJM0Gkda3pgAT) (2026-11-17)
 - [ ] Xcode project, folder structure, Swift 6 strict concurrency on
 - [ ] Secrets handling for the TMDB token (ADR 0004)
 - [ ] GitHub Actions: build + test on every push
