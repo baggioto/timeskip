@@ -1,5 +1,7 @@
 # Timeskip
 
+[![Tests](https://github.com/baggioto/timeskip/actions/workflows/tests.yml/badge.svg)](https://github.com/baggioto/timeskip/actions/workflows/tests.yml)
+
 A movie & TV tracker for iOS: browse what's trending, search, keep a watchlist and track the episodes you've watched.
 
 Built in public as a senior-level iOS portfolio project: every feature is a deliberate exercise in modern iOS engineering (SwiftUI, Swift Concurrency, testing, modularization, CI) and every decision is documented.
@@ -24,7 +26,7 @@ Later: offline support, episode tracking, widgets, notifications, deep links. Fu
 | Persistence | SwiftData (planned) |
 | Modules | Swift Package Manager (planned) |
 | Tests | Swift Testing, snapshot tests (planned) |
-| CI | GitHub Actions (planned) |
+| CI | GitHub Actions (build + unit tests on every push) |
 | Data | [TMDB API](https://developer.themoviedb.org/) |
 
 Minimum target: iOS 18 ([ADR 0005](docs/adr/0005-ios-18-and-xcodegen.md)). Project generated with XcodeGen.

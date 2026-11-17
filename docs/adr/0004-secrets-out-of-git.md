@@ -9,7 +9,7 @@ A token committed to a repository is effectively public, even if the repo is pri
 ## Decision
 - The TMDB token lives in a local `Secrets.xcconfig`, listed in `.gitignore`.
 - The repo ships a `Secrets.example.xcconfig` with a placeholder.
-- CI gets the token from a GitHub Actions secret.
+- Unit tests never hit the real API, so CI needs no token. If integration tests are added later, CI gets the token from a GitHub Actions secret.
 
 ## Consequences
 - New contributors copy the example file and add their own token.

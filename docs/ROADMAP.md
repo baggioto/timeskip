@@ -7,7 +7,7 @@ Each milestone is small enough to finish. A box is only checked when it's merged
 - [x] Screen mockups in [Figma](https://www.figma.com/design/XDV0KDQZaAJM0Gkda3pgAT) (2026-11-17)
 - [x] Xcode project (XcodeGen), folder structure, Swift 6 strict concurrency on (2026-11-17)
 - [x] Secrets handling for the TMDB token (ADR 0004) (2026-11-17)
-- [ ] GitHub Actions: build + test on every push
+- [x] GitHub Actions: build + test on every push (2026-11-17)
 
 ## v0.1: MVP
 - [ ] API client (`async`/`await`, typed errors)
