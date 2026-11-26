@@ -9,3 +9,7 @@ Short documents that capture one decision each: the context, the decision, and i
 | [0003](0003-swiftui-and-swift-6.md) | SwiftUI and Swift 6 strict concurrency | Accepted |
 | [0004](0004-secrets-out-of-git.md) | Keep API secrets out of git | Accepted |
 | [0005](0005-ios-18-and-xcodegen.md) | iOS 18 minimum and an XcodeGen project | Accepted |
+| [0006](0006-actor-image-cache.md) | A custom actor-based image cache instead of AsyncImage | Accepted |
+| [0007](0007-spm-modules.md) | Shared code in SPM modules, features in the app target | Accepted |
+| [0008](0008-persistence.md) | SwiftData for the watchlist, JSON files for the feed cache | Accepted |
+| [0009](0009-episode-tracking-and-reminders.md) | Episode tracking and new-episode reminders, all on device | Accepted |

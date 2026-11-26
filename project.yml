@@ -4,6 +4,9 @@ options:
   deploymentTarget:
     iOS: "18.0"
   createIntermediateGroups: true
+packages:
+  TimeskipKit:
+    path: Packages/TimeskipKit
 configFiles:
   Debug: Config/Base.xcconfig
   Release: Config/Base.xcconfig
@@ -14,17 +17,27 @@ settings:
     SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
     SWIFT_APPROACHABLE_CONCURRENCY: YES
     TARGETED_DEVICE_FAMILY: "1"
-    MARKETING_VERSION: "0.0.1"
+    MARKETING_VERSION: "0.3.0"
     CURRENT_PROJECT_VERSION: "1"
 targets:
   Timeskip:
     type: application
     platform: iOS
     sources: [Timeskip]
+    dependencies:
+      - package: TimeskipKit
+        product: TMDBKit
+      - package: TimeskipKit
+        product: DesignSystem
     info:
       path: Timeskip/Info.plist
       properties:
         TMDBReadToken: $(TMDB_READ_TOKEN)
+        CFBundleURLTypes:
+          - CFBundleURLName: com.baggioto.Timeskip
+            CFBundleURLSchemes: [timeskip]
+        CFBundleLocalizations: [en, pt-BR]
+        CFBundleDevelopmentRegion: en
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.baggioto.Timeskip
@@ -45,11 +58,23 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.baggioto.TimeskipTests
         GENERATE_INFOPLIST_FILE: YES
+  TimeskipUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [TimeskipUITests]
+    dependencies:
+      - target: Timeskip
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.baggioto.TimeskipUITests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: Timeskip
 schemes:
   Timeskip:
     build:
       targets:
         Timeskip: all
         TimeskipTests: [test]
+        TimeskipUITests: [test]
     test:
-      targets: [TimeskipTests]
+      targets: [TimeskipTests, TimeskipUITests]

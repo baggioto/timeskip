@@ -1,0 +1,176 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "Add your TMDB read token to Config/Secrets.xcconfig and rebuild.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione seu token de leitura do TMDB em Config/Secrets.xcconfig e compile de novo."
+          }
+        }
+      }
+    },
+    "Check your connection and try again.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verifique sua conexão e tente de novo."
+          }
+        }
+      }
+    },
+    "Episode %lld": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Episódio %lld"
+          }
+        }
+      }
+    },
+    "Movie": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filme"
+          }
+        }
+      }
+    },
+    "S%lld · E%lld": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "T%lld · E%lld"
+          }
+        }
+      }
+    },
+    "Series": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Série"
+          }
+        }
+      }
+    },
+    "Something went wrong": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Algo deu errado"
+          }
+        }
+      }
+    },
+    "TMDB rejected the token (401).": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O TMDB recusou o token (401)."
+          }
+        }
+      }
+    },
+    "TMDB returned an error (%lld).": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O TMDB retornou um erro (%lld)."
+          }
+        }
+      }
+    },
+    "TMDB sent a response the app couldn't read.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O TMDB enviou uma resposta que o app não conseguiu ler."
+          }
+        }
+      }
+    },
+    "TMDB token missing": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token do TMDB ausente"
+          }
+        }
+      }
+    },
+    "The request failed. Try again.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A requisição falhou. Tente de novo."
+          }
+        }
+      }
+    },
+    "The request was cancelled. Try again.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A requisição foi cancelada. Tente de novo."
+          }
+        }
+      }
+    },
+    "This week": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta semana"
+          }
+        }
+      }
+    },
+    "Today": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoje"
+          }
+        }
+      }
+    },
+    "Too many requests. Try again in a moment.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muitas requisições. Tente de novo em instantes."
+          }
+        }
+      }
+    },
+    "You're offline": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Você está sem conexão"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

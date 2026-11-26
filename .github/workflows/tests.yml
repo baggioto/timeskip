@@ -6,7 +6,19 @@ on:
   pull_request:
 
 jobs:
-  unit-tests:
+  lint:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select latest Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+      # swift-format ships with Xcode; rules live in .swift-format.
+      - name: swift-format lint
+        run: xcrun swift-format lint --strict --recursive Timeskip TimeskipTests TimeskipUITests Packages
+
+  tests:
     runs-on: macos-26
     steps:
       - uses: actions/checkout@v4
@@ -16,12 +28,11 @@ jobs:
           xcode-version: latest-stable
       - name: Generate project
         run: brew install xcodegen && xcodegen generate
-      # No Secrets.xcconfig in CI: unit tests never call the real TMDB API (ADR 0004).
-      - name: Run unit tests
+      # No Secrets.xcconfig in CI: unit tests use mocks and UI tests run with canned data (ADR 0004).
+      - name: Run unit and UI tests
         run: |
           DEVICE=$(xcrun simctl list devices available | grep -oE 'iPhone [0-9]+[^(]*' | head -1 | sed 's/ *$//')
           echo "Testing on $DEVICE"
           xcodebuild test -project Timeskip.xcodeproj -scheme Timeskip \
             -destination "platform=iOS Simulator,name=$DEVICE" \
-            -only-testing:TimeskipTests \
             CODE_SIGNING_ALLOWED=NO -quiet

@@ -1,4 +1,6 @@
 import Testing
+
+@testable import TMDBKit
 @testable import Timeskip
 
 struct AppConfigTests {
