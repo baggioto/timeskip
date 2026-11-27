@@ -13,3 +13,4 @@ Short documents that capture one decision each: the context, the decision, and i
 | [0007](0007-spm-modules.md) | Shared code in SPM modules, features in the app target | Accepted |
 | [0008](0008-persistence.md) | SwiftData for the watchlist, JSON files for the feed cache | Accepted |
 | [0009](0009-episode-tracking-and-reminders.md) | Episode tracking and new-episode reminders, all on device | Accepted |
+| [0010](0010-up-next-widget.md) | "Up next" widget through an app-group snapshot | Accepted |

@@ -1,0 +1,69 @@
+{
+  "sourceLanguage": "en",
+  "version": "1.0",
+  "strings": {
+    "Up next": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A seguir"
+          }
+        }
+      }
+    },
+    "Nothing up next": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada a seguir"
+          }
+        }
+      }
+    },
+    "Mark an episode as watched to see what's next.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marque um episódio como assistido para ver o próximo."
+          }
+        }
+      }
+    },
+    "The next episode of the shows you're watching.": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O próximo episódio das séries que você está assistindo."
+          }
+        }
+      }
+    },
+    "S%lld · E%lld": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "T%lld · E%lld"
+          }
+        }
+      }
+    },
+    "%lld of %lld episodes": {
+      "localizations": {
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld de %2$lld episódios"
+          }
+        }
+      }
+    },
+    "%@ · %@": {
+      "shouldTranslate": false
+    }
+  }
+}

@@ -29,6 +29,13 @@ targets:
         product: TMDBKit
       - package: TimeskipKit
         product: DesignSystem
+      - package: TimeskipKit
+        product: AppGroupKit
+      - target: TimeskipWidget
+    entitlements:
+      path: Timeskip/Timeskip.entitlements
+      properties:
+        com.apple.security.application-groups: [group.com.baggioto.Timeskip]
     info:
       path: Timeskip/Info.plist
       properties:
@@ -52,6 +59,31 @@ targets:
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: >-
           UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown
           UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight
+  TimeskipWidget:
+    type: app-extension
+    platform: iOS
+    sources: [TimeskipWidget]
+    dependencies:
+      - package: TimeskipKit
+        product: TMDBKit
+      - package: TimeskipKit
+        product: DesignSystem
+      - package: TimeskipKit
+        product: AppGroupKit
+    entitlements:
+      path: TimeskipWidget/TimeskipWidget.entitlements
+      properties:
+        com.apple.security.application-groups: [group.com.baggioto.Timeskip]
+    info:
+      path: TimeskipWidget/Info.plist
+      properties:
+        CFBundleDisplayName: Timeskip
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.baggioto.Timeskip.Widget
+        GENERATE_INFOPLIST_FILE: YES
   TimeskipTests:
     type: bundle.unit-test
     platform: iOS

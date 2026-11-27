@@ -43,7 +43,7 @@ final class AppDependencies {
         return AppDependencies(
             tmdb: service,
             watchlist: WatchlistStore(container: container),
-            episodes: EpisodeTracker(container: container),
+            episodes: EpisodeTracker(container: container, publisher: WidgetUpNextPublisher()),
             feedCache: FeedCache()
         )
     }

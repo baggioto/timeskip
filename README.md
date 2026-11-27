@@ -15,6 +15,9 @@ Built with AI assistance (Claude Code). I own the product scope and the decision
   &nbsp;&nbsp;
   <img src="docs/media/episodes.gif" width="280" alt="Searching for a show, marking episodes as watched and seeing it in Up next">
 </p>
+<p align="center">
+  <img src="docs/media/widget.png" width="180" alt="The Up next widget on the home screen, showing Severance, S1 · E4">
+</p>
 
 ## Features (v0.3)
 - Trending movies & shows (today / this week) with infinite scroll and pull to refresh
@@ -24,6 +27,7 @@ Built with AI assistance (Claude Code). I own the product scope and the decision
 - Opens offline with the last trending page and says how old it is
 - Episode tracking: mark episodes or whole seasons as watched, see progress, and an "Up next" list
 - Reminder on the day a show's next episode airs (local notification)
+- Home-screen and lock-screen widget with the next episode to watch
 - Deep links: `timeskip://title/tv/1399`
 - English and Brazilian Portuguese, including TMDB data in the user's language
 - VoiceOver labels and actions, Dynamic Type-friendly layout
@@ -39,12 +43,13 @@ Built with AI assistance (Claude Code). I own the product scope and the decision
 - **Modular:** shared code in a local Swift package (`TMDBKit`, `DesignSystem`); design components can't see app state ([ADR 0007](docs/adr/0007-spm-modules.md)).
 - **Persistence behind a store:** SwiftData for the watchlist, a JSON feed cache for offline launches; views never touch SwiftData ([ADR 0008](docs/adr/0008-persistence.md)).
 - **On-device "Up next" and reminders:** no backend; notification taps go through the same deep-link router as URLs ([ADR 0009](docs/adr/0009-episode-tracking-and-reminders.md)).
+- **Widget without a shared database:** the app writes a JSON snapshot of "Up next" to an app group and reloads the widget; the SwiftData store never leaves the app ([ADR 0010](docs/adr/0010-up-next-widget.md)).
 - **Observability:** OSLog categories with request timing, and a MetricKit subscriber.
-- **67 unit tests** (Swift Testing): client and decoding with a stubbed transport, ViewModels with a mock service, image cache, persistence, offline behavior, episode tracking, reminders, deep links. **5 UI tests** (XCUITest) on canned data, passing on iPhone and iPad.
+- **71 unit tests** (Swift Testing): client and decoding with a stubbed transport, ViewModels with a mock service, image cache, persistence, offline behavior, episode tracking, reminders, deep links, the widget snapshot. **5 UI tests** (XCUITest) on canned data, passing on iPhone and iPad.
 - **Measured performance:** XCTest metrics for launch, scroll memory and each image-cache level; a memory hit costs ~17 µs vs ~7.6 ms from disk (simulator numbers, [docs/PERFORMANCE.md](docs/PERFORMANCE.md)).
 - **CI:** swift-format lint + unit and UI tests on every push.
 
-Later: a home-screen widget, TestFlight. Full plan in [docs/ROADMAP.md](docs/ROADMAP.md).
+Later: TestFlight. Full plan in [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Architecture
 

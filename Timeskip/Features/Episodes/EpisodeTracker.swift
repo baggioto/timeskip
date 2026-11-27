@@ -87,10 +87,14 @@ final class EpisodeTracker {
     private(set) var upNext: [UpNextItem] = []
 
     private let context: ModelContext
+    private let publisher: any UpNextPublishing
 
-    init(container: ModelContainer) {
+    init(container: ModelContainer, publisher: any UpNextPublishing = NoUpNextPublisher()) {
         context = ModelContext(container)
+        self.publisher = publisher
         refresh()
+        // An empty list doesn't count as a change, so publish once on launch: the widget may still show old shows.
+        if upNext.isEmpty { publisher.publish([]) }
     }
 
     convenience init() {
@@ -192,6 +196,7 @@ final class EpisodeTracker {
             (try? context.fetch(
                 FetchDescriptor<TrackedShow>(sortBy: [SortDescriptor(\.lastWatchedAt, order: .reverse)])))
             ?? []
+        let previous = upNext
         upNext = shows.compactMap { show in
             let total = show.seasonEpisodeCounts.reduce(0) { $0 + $1.episodes }
             let watchedCount = watched.count { $0.showID == show.showID && $0.season > 0 }
@@ -201,5 +206,6 @@ final class EpisodeTracker {
             return UpNextItem(
                 show: show.title, season: next.season, episode: next.episode, watched: watchedCount, total: total)
         }
+        if upNext != previous { publisher.publish(upNext) }
     }
 }

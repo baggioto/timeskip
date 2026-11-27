@@ -1,3 +1,4 @@
+import AppGroupKit
 import Foundation
 import Testing
 import UserNotifications
@@ -258,5 +259,52 @@ struct SeasonViewModelTests {
         await model.load()
 
         #expect(model.state == .failed(.offline))
+    }
+}
+
+/// Records what the tracker publishes for the widget.
+final class FakeUpNextPublisher: UpNextPublishing {
+    private(set) var published: [[UpNextItem]] = []
+    func publish(_ items: [UpNextItem]) { published.append(items) }
+}
+
+struct WidgetSnapshotTests {
+    @Test func trackerPublishesUpNextWhenItChanges() {
+        let publisher = FakeUpNextPublisher()
+        let tracker = EpisodeTracker(container: WatchlistStore.makeContainer(inMemory: true), publisher: publisher)
+        #expect(publisher.published.count == 1)  // empty list on launch, so the widget drops stale shows
+
+        tracker.toggle(episode(1, 1), show: show, seasons: seasons)
+
+        #expect(publisher.published.count == 2)
+        let item = try? #require(publisher.published.last?.first)
+        #expect(item?.season == 1)
+        #expect(item?.episode == 2)
+    }
+
+    @Test func snapshotRoundTripsThroughTheStore() throws {
+        let directory = FileManager.default.temporaryDirectory.appending(path: "UpNext-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let store = UpNextSnapshotStore(directory: directory)
+        let item = UpNextItem(show: show, season: 2, episode: 3, watched: 12, total: 20)
+
+        try store.write(UpNextSnapshot(items: [item.snapshotItem]))
+
+        let read = try #require(store.read()?.items.first)
+        #expect(read.name == "Game of Thrones")
+        #expect(read.season == 2 && read.episode == 3)
+        #expect(read.progress == 0.6)
+    }
+
+    @Test func storeWithoutAnAppGroupDoesNothing() throws {
+        let store = UpNextSnapshotStore(directory: nil)
+        try store.write(UpNextSnapshot(items: []))
+        #expect(store.read() == nil)
+    }
+
+    @Test func widgetDeepLinkMatchesTheRouter() {
+        let item = UpNextItem(show: show, season: 1, episode: 1, watched: 0, total: 5).snapshotItem
+        #expect(item.deepLink == Router.url(for: show.id))
     }
 }

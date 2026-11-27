@@ -65,3 +65,10 @@ One entry per work session: what was done, what was decided, what's next.
 - Details: content capped at a 720 pt readable width and centered (the backdrop stays full width); a taller backdrop on iPad and a shorter header in compact height, so on a landscape iPhone the title and "Add to Watchlist" fit on the first screen.
 - New UI test: rotates to landscape, opens a title and checks the title and the watchlist button are hittable. All 5 UI tests pass on iPhone 17 Pro and iPad Pro 13".
 - On iPad the floating tab bar isn't exposed to XCUITest as a `TabBar`, so the tests find tabs through a small helper.
+
+## 2026-11-27: "Up next" widget
+- Checked the assumption in the roadmap: App Groups are available to free Apple Developer accounts, so the widget didn't need to wait for the paid account.
+- The app writes a JSON snapshot of "Up next" to the app group and reloads the widget; the widget never opens the SwiftData store ([ADR 0010](adr/0010-up-next-widget.md)). Shared code in a new Foundation-only module, `AppGroupKit`.
+- Small (poster, show, next episode, progress), medium (top 3 shows, each tappable) and lock-screen sizes; taps open the show through the existing deep link. Strings in English and Portuguese.
+- Verified on the simulator: the snapshot lands in the group container, and the widget on the home screen shows the real poster and next episode.
+- 4 new unit tests (71 total): publishing on change, the store round trip, no app group in CI, and the widget link matching `Router`.

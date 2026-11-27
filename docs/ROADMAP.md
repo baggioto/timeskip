@@ -36,7 +36,7 @@ Each milestone is small enough to finish. A box is only checked when it's merged
 - [x] Performance tests with XCTest metrics, simulator numbers in [PERFORMANCE.md](PERFORMANCE.md)
 - [x] iPad and landscape: adaptive grid, sidebar-adaptable tabs, readable-width details, a landscape UI test
 - [ ] Performance pass with Instruments on a device (hitch ratio, real launch time)
-- [ ] Widget ("Up next"): needs an App Group, so it waits for the paid developer account and signing setup
+- [x] Widget ("Up next"): app-group snapshot, small/medium/lock screen ([ADR 0010](adr/0010-up-next-widget.md)) (2026-11-27)
 - [x] Deep links: `timeskip://title/{movie|tv}/{id}` (2026-11-26)
 - [x] Local notifications on the day the next episode airs (2026-11-26)
 - [x] Logging (OSLog categories) + MetricKit subscriber (2026-11-26)

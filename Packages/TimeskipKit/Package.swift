@@ -9,11 +9,14 @@ let package = Package(
     products: [
         .library(name: "TMDBKit", targets: ["TMDBKit"]),
         .library(name: "DesignSystem", targets: ["DesignSystem"]),
+        .library(name: "AppGroupKit", targets: ["AppGroupKit"]),
     ],
     targets: [
         // Models, the TMDB client and the image cache. No SwiftUI.
         .target(name: "TMDBKit"),
         // Color tokens and reusable views. Knows TMDB models, never features.
         .target(name: "DesignSystem", dependencies: ["TMDBKit"]),
+        // What the app shares with the widget through the app group. Foundation only.
+        .target(name: "AppGroupKit"),
     ]
 )

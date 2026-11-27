@@ -16,7 +16,7 @@ jobs:
           xcode-version: latest-stable
       # swift-format ships with Xcode; rules live in .swift-format.
       - name: swift-format lint
-        run: xcrun swift-format lint --strict --recursive Timeskip TimeskipTests TimeskipUITests Packages
+        run: xcrun swift-format lint --strict --recursive Timeskip TimeskipTests TimeskipUITests TimeskipWidget Packages
 
   tests:
     runs-on: macos-26
