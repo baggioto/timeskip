@@ -6,6 +6,7 @@ struct TrendingView: View {
     @State private var model: TrendingViewModel
     @Environment(WatchlistStore.self) private var watchlist
     @Environment(Router.self) private var router
+    @Environment(\.horizontalSizeClass) private var sizeClass
     private let service: any TMDBService
 
     init(service: any TMDBService, cache: any FeedCaching = NoFeedCache()) {
@@ -14,9 +15,14 @@ struct TrendingView: View {
     }
 
     /// Scales with Dynamic Type so titles stay readable at large sizes (fewer, wider columns).
-    @ScaledMetric(relativeTo: .subheadline) private var minCellWidth = 104
+    @ScaledMetric(relativeTo: .subheadline) private var compactCellWidth = 104
+    /// iPad and wide windows: bigger posters instead of a dozen tiny columns.
+    @ScaledMetric(relativeTo: .subheadline) private var regularCellWidth = 150
 
-    private var columns: [GridItem] { [GridItem(.adaptive(minimum: minCellWidth), spacing: 12, alignment: .top)] }
+    private var columns: [GridItem] {
+        let minimum = sizeClass == .regular ? regularCellWidth : compactCellWidth
+        return [GridItem(.adaptive(minimum: minimum), spacing: sizeClass == .regular ? 20 : 12, alignment: .top)]
+    }
 
     var body: some View {
         @Bindable var router = router

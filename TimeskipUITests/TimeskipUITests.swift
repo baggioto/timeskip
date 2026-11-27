@@ -23,7 +23,7 @@ nonisolated final class TimeskipUITests: XCTestCase {
         add.tap()
         XCTAssertTrue(app.buttons["In Watchlist"].waitForExistence(timeout: 2))
 
-        app.tabBars.buttons["Watchlist"].tap()
+        tab("Watchlist", in: app).tap()
         XCTAssertTrue(app.staticTexts["The Long Night"].waitForExistence(timeout: 2))
         XCTAssertFalse(app.staticTexts["Your watchlist is empty"].exists)
     }
@@ -31,7 +31,7 @@ nonisolated final class TimeskipUITests: XCTestCase {
     @MainActor
     func testSearchShowsMatchingTitle() {
         let app = launch()
-        app.tabBars.buttons["Search"].tap()
+        tab("Search", in: app).tap()
 
         let field = app.searchFields.firstMatch
         XCTAssertTrue(field.waitForExistence(timeout: 5))
@@ -45,7 +45,7 @@ nonisolated final class TimeskipUITests: XCTestCase {
     @MainActor
     func testEmptyWatchlistAndAbout() {
         let app = launch()
-        app.tabBars.buttons["Watchlist"].tap()
+        tab("Watchlist", in: app).tap()
         XCTAssertTrue(app.staticTexts["Your watchlist is empty"].waitForExistence(timeout: 5))
 
         app.buttons["About"].tap()
@@ -69,7 +69,42 @@ nonisolated final class TimeskipUITests: XCTestCase {
         XCTAssertTrue(firstEpisode.waitForExistence(timeout: 5))
         firstEpisode.tap()
 
-        app.tabBars.buttons["Watchlist"].tap()
+        tab("Watchlist", in: app).tap()
         XCTAssertTrue(app.staticTexts["Up next"].waitForExistence(timeout: 2))
+    }
+
+    /// Landscape on iPhone, any orientation on iPad: the grid and details stay usable.
+    /// The screenshots are kept in the test results for a visual check.
+    @MainActor
+    func testLandscapeGridAndDetails() {
+        let app = launch()
+        XCUIDevice.shared.orientation = .landscapeLeft
+        addTeardownBlock { @MainActor in XCUIDevice.shared.orientation = .portrait }
+
+        let card = app.buttons.matching(NSPredicate(format: "label CONTAINS 'Signal Lost'")).firstMatch
+        XCTAssertTrue(card.waitForExistence(timeout: 5))
+        attachScreenshot(app, named: "Landscape grid")
+        card.tap()
+
+        let add = app.buttons["Add to Watchlist"]
+        XCTAssertTrue(add.waitForExistence(timeout: 5))
+        XCTAssertTrue(add.isHittable)
+        XCTAssertTrue(app.staticTexts["Signal Lost"].isHittable)
+        attachScreenshot(app, named: "Landscape details")
+    }
+
+    /// iPhone has a classic tab bar; on iPad the floating tab bar isn't exposed as a `TabBar`.
+    @MainActor
+    private func tab(_ name: String, in app: XCUIApplication) -> XCUIElement {
+        let classic = app.tabBars.buttons[name]
+        return classic.exists ? classic : app.buttons.matching(identifier: name).firstMatch
+    }
+
+    @MainActor
+    private func attachScreenshot(_ app: XCUIApplication, named name: String) {
+        let attachment = XCTAttachment(screenshot: app.screenshot())
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
     }
 }

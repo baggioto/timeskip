@@ -8,6 +8,11 @@ struct DetailsView: View {
     @Environment(EpisodeTracker.self) private var tracker
     @Environment(EpisodeReminders.self) private var reminders
     @State private var reminderMessage: String?
+    @Environment(\.horizontalSizeClass) private var sizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
+
+    /// Text lines stay readable on iPad: content is capped and centered, the backdrop stays full width.
+    private let readableWidth: CGFloat = 720
 
     init(title: Title, service: any TMDBService) {
         _model = State(initialValue: DetailsViewModel(title: title, service: service))
@@ -25,6 +30,8 @@ struct DetailsView: View {
                     sections
                 }
                 .padding(.horizontal)
+                .frame(maxWidth: readableWidth)
+                .frame(maxWidth: .infinity)
             }
             .padding(.bottom, 32)
         }
@@ -42,12 +49,20 @@ struct DetailsView: View {
         }
     }
 
+    /// iPhone in landscape: a shorter header, so the title and the watchlist button fit on the first screen.
+    private var isShortScreen: Bool { verticalSizeClass == .compact }
+
+    private var headerHeight: CGFloat {
+        if isShortScreen { return 170 }
+        return sizeClass == .regular ? 380 : 260
+    }
+
     // MARK: - Sections
 
     private var header: some View {
         ZStack(alignment: .bottomLeading) {
             RemoteImage(url: TMDBImage.url(title.backdropPath, size: .backdrop))
-                .frame(height: 260)
+                .frame(height: headerHeight)
                 .frame(maxWidth: .infinity)
                 .overlay {
                     LinearGradient(colors: [.clear, Theme.background], startPoint: .center, endPoint: .bottom)
@@ -55,7 +70,7 @@ struct DetailsView: View {
 
             HStack(alignment: .bottom, spacing: 14) {
                 RemoteImage(url: TMDBImage.url(title.posterPath, size: .poster))
-                    .frame(width: 100, height: 150)
+                    .frame(width: isShortScreen ? 80 : 100, height: isShortScreen ? 120 : 150)
                     .clipShape(.rect(cornerRadius: 10))
                     .shadow(radius: 8)
 
@@ -74,6 +89,8 @@ struct DetailsView: View {
                 }
             }
             .padding(.horizontal)
+            .frame(maxWidth: readableWidth, alignment: .leading)
+            .frame(maxWidth: .infinity)
             .offset(y: 40)
         }
         .padding(.bottom, 40)

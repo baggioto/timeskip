@@ -57,3 +57,11 @@ One entry per work session: what was done, what was decided, what's next.
 - Simulator, Debug build: memory hit ~17 µs per poster, disk hit ~7.6 ms, miss without network ~9.2 ms; launch to responsive 1.49 s; 64 MB peak while scrolling, with no growth between flings.
 - `PreviewTMDBService(feedPages:)` serves a long paginated feed for the scroll test (`-ui-testing-large-feed`).
 - The UI performance tests only run with `TEST_RUNNER_TIMESKIP_PERF=1`, because CI runners are too noisy. The simulator doesn't report hitch ratio; that needs the device pass.
+
+## 2026-11-27: iPad and landscape
+- The app now runs on iPad (all orientations) and on iPhone in landscape.
+- Tabs use `.sidebarAdaptable`: a tab bar on iPhone, a floating tab bar on iPad that turns into a sidebar.
+- Trending grid: bigger minimum cell width in regular width, so iPad shows 6 large posters per row instead of a dozen small ones.
+- Details: content capped at a 720 pt readable width and centered (the backdrop stays full width); a taller backdrop on iPad and a shorter header in compact height, so on a landscape iPhone the title and "Add to Watchlist" fit on the first screen.
+- New UI test: rotates to landscape, opens a title and checks the title and the watchlist button are hittable. All 5 UI tests pass on iPhone 17 Pro and iPad Pro 13".
+- On iPad the floating tab bar isn't exposed to XCUITest as a `TabBar`, so the tests find tabs through a small helper.

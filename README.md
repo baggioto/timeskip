@@ -27,6 +27,7 @@ Built with AI assistance (Claude Code). I own the product scope and the decision
 - Deep links: `timeskip://title/tv/1399`
 - English and Brazilian Portuguese, including TMDB data in the user's language
 - VoiceOver labels and actions, Dynamic Type-friendly layout
+- iPhone (portrait and landscape) and iPad: bigger grid cells, a sidebar and a readable-width details column
 - Loading, empty and error states on every screen, including offline and a missing token
 
 ## Engineering highlights
@@ -39,11 +40,11 @@ Built with AI assistance (Claude Code). I own the product scope and the decision
 - **Persistence behind a store:** SwiftData for the watchlist, a JSON feed cache for offline launches; views never touch SwiftData ([ADR 0008](docs/adr/0008-persistence.md)).
 - **On-device "Up next" and reminders:** no backend; notification taps go through the same deep-link router as URLs ([ADR 0009](docs/adr/0009-episode-tracking-and-reminders.md)).
 - **Observability:** OSLog categories with request timing, and a MetricKit subscriber.
-- **67 unit tests** (Swift Testing): client and decoding with a stubbed transport, ViewModels with a mock service, image cache, persistence, offline behavior, episode tracking, reminders, deep links. **4 UI tests** (XCUITest) on canned data.
+- **67 unit tests** (Swift Testing): client and decoding with a stubbed transport, ViewModels with a mock service, image cache, persistence, offline behavior, episode tracking, reminders, deep links. **5 UI tests** (XCUITest) on canned data, passing on iPhone and iPad.
 - **Measured performance:** XCTest metrics for launch, scroll memory and each image-cache level; a memory hit costs ~17 µs vs ~7.6 ms from disk (simulator numbers, [docs/PERFORMANCE.md](docs/PERFORMANCE.md)).
 - **CI:** swift-format lint + unit and UI tests on every push.
 
-Later: iPad and landscape layouts, a home-screen widget, TestFlight. Full plan in [docs/ROADMAP.md](docs/ROADMAP.md).
+Later: a home-screen widget, TestFlight. Full plan in [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Architecture
 

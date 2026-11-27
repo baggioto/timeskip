@@ -34,6 +34,7 @@ Each milestone is small enough to finish. A box is only checked when it's merged
 - [ ] Accessibility Inspector audit on a device, plus larger text sizes in UI tests
 - [x] EN / PT-BR localization: String Catalogs in the app and both packages; TMDB data in the user's language (2026-11-26)
 - [x] Performance tests with XCTest metrics, simulator numbers in [PERFORMANCE.md](PERFORMANCE.md)
+- [x] iPad and landscape: adaptive grid, sidebar-adaptable tabs, readable-width details, a landscape UI test
 - [ ] Performance pass with Instruments on a device (hitch ratio, real launch time)
 - [ ] Widget ("Up next"): needs an App Group, so it waits for the paid developer account and signing setup
 - [x] Deep links: `timeskip://title/{movie|tv}/{id}` (2026-11-26)

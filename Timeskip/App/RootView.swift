@@ -19,6 +19,8 @@ struct RootView: View {
                 WatchlistView(service: dependencies.tmdb)
             }
         }
+        // A tab bar on iPhone; on iPad it can turn into a sidebar.
+        .tabViewStyle(.sidebarAdaptable)
         .tint(Theme.accent)
         .environment(dependencies.watchlist)
         .environment(dependencies.episodes)
