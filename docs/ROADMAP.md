@@ -35,13 +35,14 @@ Each milestone is small enough to finish. A box is only checked when it's merged
 - [x] EN / PT-BR localization: String Catalogs in the app and both packages; TMDB data in the user's language (2026-11-26)
 - [x] Performance tests with XCTest metrics, simulator numbers in [PERFORMANCE.md](PERFORMANCE.md)
 - [x] iPad and landscape: adaptive grid, sidebar-adaptable tabs, readable-width details, a landscape UI test
-- [ ] Performance pass with Instruments on a device (hitch ratio, real launch time)
+- [x] Performance pass on a device: iPhone 13, 0 hitches at ~58.6 fps, Release launch ~0.67 s ([PERFORMANCE.md](PERFORMANCE.md)) (2026-11-27)
 - [x] Widget ("Up next"): app-group snapshot, small/medium/lock screen ([ADR 0010](adr/0010-up-next-widget.md)) (2026-11-27)
 - [x] Deep links: `timeskip://title/{movie|tv}/{id}` (2026-11-26)
 - [x] Local notifications on the day the next episode airs (2026-11-26)
 - [x] Logging (OSLog categories) + MetricKit subscriber (2026-11-26)
 
 ## v1.0: Ship
+- [x] CI also builds the Release configuration (2026-11-27)
 - [ ] Fastlane + TestFlight
 - [x] README with GIFs and an architecture diagram (2026-11-26)
 - [ ] Design doc in `docs/`

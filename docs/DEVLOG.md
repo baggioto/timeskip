@@ -72,3 +72,10 @@ One entry per work session: what was done, what was decided, what's next.
 - Small (poster, show, next episode, progress), medium (top 3 shows, each tappable) and lock-screen sizes; taps open the show through the existing deep link. Strings in English and Portuguese.
 - Verified on the simulator: the snapshot lands in the group container, and the widget on the home screen shows the real poster and next episode.
 - 4 new unit tests (71 total): publishing on change, the store round trip, no app group in CI, and the widget link matching `Router`.
+
+## 2026-11-27: Device performance pass, and a Release build fix
+- The app didn't compile in Release: `PreviewTMDBService` is `#if DEBUG`, but the `#Preview` blocks and the UI-testing path in `AppDependencies` used it unguarded. CI only built Debug, so it never showed up. Wrapped those call sites in `#if DEBUG` (Release ships no canned data) and added a Release build job to CI.
+- Ran the performance UI tests on an iPhone 13 (iOS 27.2.1): 0 hitches in 5 flings through 200 titles at ~58.6 fps, 32.6 MB peak memory, launch to responsive 0.95 s (Debug).
+- Instruments App Launch on a Release build: ~0.67 s from tap to first frame once caches are warm. The app's own startup code takes ~13 ms; the rest is process creation and the first SwiftUI render. Details in [PERFORMANCE.md](PERFORMANCE.md).
+- Correction to the widget entry: with a free account, Xcode's automatic signing didn't add the App Group to the provisioning profile from the command line, so the device builds for this pass were signed without it (the snapshot is skipped safely when the container is `nil`). The widget is verified on the simulator only; checking it on a device is open.
+
