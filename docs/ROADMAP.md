@@ -45,4 +45,4 @@ Each milestone is small enough to finish. A box is only checked when it's merged
 - [x] CI also builds the Release configuration (2026-11-27)
 - [ ] Fastlane + TestFlight
 - [x] README with GIFs and an architecture diagram (2026-11-26)
-- [ ] Design doc in `docs/`
+- [x] Design doc: [DESIGN.md](DESIGN.md) (2026-11-27)

@@ -79,3 +79,7 @@ One entry per work session: what was done, what was decided, what's next.
 - Instruments App Launch on a Release build: ~0.67 s from tap to first frame once caches are warm. The app's own startup code takes ~13 ms; the rest is process creation and the first SwiftUI render. Details in [PERFORMANCE.md](PERFORMANCE.md).
 - Correction to the widget entry: with a free account, Xcode's automatic signing didn't add the App Group to the provisioning profile from the command line, so the device builds for this pass were signed without it (the snapshot is skipped safely when the container is `nil`). The widget is verified on the simulator only; checking it on a device is open.
 
+## 2026-11-27: Design doc
+- New [DESIGN.md](DESIGN.md): the end-to-end document to read first. Goals and non-goals, functional and non-functional requirements (with the measured device numbers next to each target), data and endpoints, key flows, concurrency, alternatives considered, failure modes, security and privacy, observability, testing, risks and a release plan. It links to ARCHITECTURE.md and the ADRs instead of repeating them.
+- Writing it surfaced two honest limitations, now listed: a reminder isn't rescheduled if TMDB moves the air date, and the TMDB read token ships inside the app binary (fine for a read-only public token; a commercial app would proxy it).
+

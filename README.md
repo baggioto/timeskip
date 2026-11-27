@@ -94,6 +94,7 @@ Minimum target: iOS 18 ([ADR 0005](docs/adr/0005-ios-18-and-xcodegen.md)). Proje
 ## Documentation
 | Doc | What's in it |
 |-----|--------------|
+| [docs/DESIGN.md](docs/DESIGN.md) | Start here: goals, requirements with measured targets, key flows, alternatives considered, failure modes, security, testing, risks |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Module diagram, feed loading sequence, concurrency model, deep links |
 | [docs/PRODUCT.md](docs/PRODUCT.md) | Problem, users, MVP scope, screens, what's out of scope |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Milestones and the engineering checklist |
