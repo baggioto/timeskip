@@ -84,8 +84,10 @@ struct SearchView: View {
     }
 }
 
-#Preview {
-    SearchView(service: PreviewTMDBService(), recentStore: RecentSearchesStore())
-        .environment(WatchlistStore())
-        .preferredColorScheme(.dark)
-}
+#if DEBUG
+    #Preview {
+        SearchView(service: PreviewTMDBService(), recentStore: RecentSearchesStore())
+            .environment(WatchlistStore())
+            .preferredColorScheme(.dark)
+    }
+#endif

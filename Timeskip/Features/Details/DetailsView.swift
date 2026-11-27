@@ -305,12 +305,14 @@ private struct SeasonsSection: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        DetailsView(title: PreviewTMDBService.sample[1], service: PreviewTMDBService())
+#if DEBUG
+    #Preview {
+        NavigationStack {
+            DetailsView(title: PreviewTMDBService.sample[1], service: PreviewTMDBService())
+        }
+        .environment(WatchlistStore())
+        .environment(EpisodeTracker())
+        .environment(EpisodeReminders())
+        .preferredColorScheme(.dark)
     }
-    .environment(WatchlistStore())
-    .environment(EpisodeTracker())
-    .environment(EpisodeReminders())
-    .preferredColorScheme(.dark)
-}
+#endif

@@ -29,11 +29,13 @@ final class AppDependencies {
     }
 
     static func live(bundle: Bundle = .main, process: ProcessInfo = .processInfo) -> AppDependencies {
-        // UI tests ask for canned data; unit tests run inside the app and must not touch the real store.
-        let isUnitTestHost = process.environment["XCTestConfigurationFilePath"] != nil
-        if process.arguments.contains(uiTestingArgument) || isUnitTestHost {
-            return uiTesting(feedPages: process.arguments.contains(largeFeedArgument) ? 10 : 1)
-        }
+        #if DEBUG
+            // UI tests ask for canned data; unit tests run inside the app and must not touch the real store.
+            let isUnitTestHost = process.environment["XCTestConfigurationFilePath"] != nil
+            if process.arguments.contains(uiTestingArgument) || isUnitTestHost {
+                return uiTesting(feedPages: process.arguments.contains(largeFeedArgument) ? 10 : 1)
+            }
+        #endif
 
         let service: any TMDBService =
             AppConfig.fromBundle(bundle)
@@ -52,11 +54,15 @@ final class AppDependencies {
     /// With `-ui-testing`: a 10-page Trending feed, for the scroll performance test.
     static let largeFeedArgument = "-ui-testing-large-feed"
 
-    /// Canned data, nothing persisted: every UI test starts from the same state, without a network.
-    private static func uiTesting(feedPages: Int) -> AppDependencies {
-        AppDependencies(
-            tmdb: PreviewTMDBService(feedPages: feedPages),
-            recentSearches: RecentSearchesStore(defaults: UserDefaults(suiteName: "ui-testing-\(UUID().uuidString)")!)
-        )
-    }
+    #if DEBUG
+        /// Canned data, nothing persisted: every UI test starts from the same state, without a network.
+        /// Debug only, like `PreviewTMDBService`: Release builds never ship the canned data.
+        private static func uiTesting(feedPages: Int) -> AppDependencies {
+            AppDependencies(
+                tmdb: PreviewTMDBService(feedPages: feedPages),
+                recentSearches: RecentSearchesStore(
+                    defaults: UserDefaults(suiteName: "ui-testing-\(UUID().uuidString)")!)
+            )
+        }
+    #endif
 }

@@ -30,7 +30,9 @@ struct RootView: View {
     }
 }
 
-#Preview {
-    RootView(dependencies: AppDependencies(tmdb: PreviewTMDBService()))
-        .preferredColorScheme(.dark)
-}
+#if DEBUG
+    #Preview {
+        RootView(dependencies: AppDependencies(tmdb: PreviewTMDBService()))
+            .preferredColorScheme(.dark)
+    }
+#endif

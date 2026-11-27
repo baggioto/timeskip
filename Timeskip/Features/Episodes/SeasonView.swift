@@ -129,13 +129,15 @@ private struct EpisodeRow: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        SeasonView(
-            show: PreviewTMDBService.sample[1],
-            season: Season(id: 1, number: 1, name: "Season 1", episodeCount: 8, airDate: nil, posterPath: nil),
-            allSeasons: [], service: PreviewTMDBService())
+#if DEBUG
+    #Preview {
+        NavigationStack {
+            SeasonView(
+                show: PreviewTMDBService.sample[1],
+                season: Season(id: 1, number: 1, name: "Season 1", episodeCount: 8, airDate: nil, posterPath: nil),
+                allSeasons: [], service: PreviewTMDBService())
+        }
+        .environment(EpisodeTracker())
+        .preferredColorScheme(.dark)
     }
-    .environment(EpisodeTracker())
-    .preferredColorScheme(.dark)
-}
+#endif

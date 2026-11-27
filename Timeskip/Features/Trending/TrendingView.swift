@@ -134,9 +134,11 @@ struct TrendingView: View {
     }
 }
 
-#Preview {
-    TrendingView(service: PreviewTMDBService())
-        .environment(WatchlistStore())
-        .environment(Router())
-        .preferredColorScheme(.dark)
-}
+#if DEBUG
+    #Preview {
+        TrendingView(service: PreviewTMDBService())
+            .environment(WatchlistStore())
+            .environment(Router())
+            .preferredColorScheme(.dark)
+    }
+#endif

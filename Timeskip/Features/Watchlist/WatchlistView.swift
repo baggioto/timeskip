@@ -99,9 +99,11 @@ private struct UpNextRow: View {
     }
 }
 
-#Preview {
-    WatchlistView(service: PreviewTMDBService())
-        .environment(WatchlistStore(items: PreviewTMDBService.sample))
-        .environment(EpisodeTracker())
-        .preferredColorScheme(.dark)
-}
+#if DEBUG
+    #Preview {
+        WatchlistView(service: PreviewTMDBService())
+            .environment(WatchlistStore(items: PreviewTMDBService.sample))
+            .environment(EpisodeTracker())
+            .preferredColorScheme(.dark)
+    }
+#endif
