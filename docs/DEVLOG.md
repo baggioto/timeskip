@@ -51,3 +51,9 @@ One entry per work session: what was done, what was decided, what's next.
 - [ARCHITECTURE.md](ARCHITECTURE.md): module/layer diagram, feed-loading sequence diagram, concurrency model and deep links (Mermaid, rendered by GitHub). A compact version is in the README.
 - Fixed text cut off at the screen edges on the details screen: `RemoteImage` used a `ZStack`, so a `scaledToFill` backdrop grew the layout wider than the screen. The image now sits in an overlay on a color that takes exactly the offered size. GIFs re-recorded.
 
+
+## 2026-11-27: Performance numbers
+- XCTest performance tests: launch time (`XCTApplicationLaunchMetric`), scrolling a 200-title Trending grid (`scrollDecelerationMetric` + `XCTMemoryMetric`), and the image cache per level (`XCTClockMetric`). Results in [PERFORMANCE.md](PERFORMANCE.md), rerun with `scripts/perf.sh`.
+- Simulator, Debug build: memory hit ~17 µs per poster, disk hit ~7.6 ms, miss without network ~9.2 ms; launch to responsive 1.49 s; 64 MB peak while scrolling, with no growth between flings.
+- `PreviewTMDBService(feedPages:)` serves a long paginated feed for the scroll test (`-ui-testing-large-feed`).
+- The UI performance tests only run with `TEST_RUNNER_TIMESKIP_PERF=1`, because CI runners are too noisy. The simulator doesn't report hitch ratio; that needs the device pass.

@@ -33,7 +33,8 @@ Each milestone is small enough to finish. A box is only checked when it's merged
 - [x] Accessibility, first pass: VoiceOver labels and actions on cards, rows and episodes; Dynamic Type-scaled grid and thumbnails (2026-11-26)
 - [ ] Accessibility Inspector audit on a device, plus larger text sizes in UI tests
 - [x] EN / PT-BR localization: String Catalogs in the app and both packages; TMDB data in the user's language (2026-11-26)
-- [ ] Performance pass with Instruments (before/after numbers in docs): needs real profiling sessions on a device
+- [x] Performance tests with XCTest metrics, simulator numbers in [PERFORMANCE.md](PERFORMANCE.md)
+- [ ] Performance pass with Instruments on a device (hitch ratio, real launch time)
 - [ ] Widget ("Up next"): needs an App Group, so it waits for the paid developer account and signing setup
 - [x] Deep links: `timeskip://title/{movie|tv}/{id}` (2026-11-26)
 - [x] Local notifications on the day the next episode airs (2026-11-26)

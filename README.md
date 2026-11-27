@@ -40,9 +40,10 @@ Built with AI assistance (Claude Code). I own the product scope and the decision
 - **On-device "Up next" and reminders:** no backend; notification taps go through the same deep-link router as URLs ([ADR 0009](docs/adr/0009-episode-tracking-and-reminders.md)).
 - **Observability:** OSLog categories with request timing, and a MetricKit subscriber.
 - **67 unit tests** (Swift Testing): client and decoding with a stubbed transport, ViewModels with a mock service, image cache, persistence, offline behavior, episode tracking, reminders, deep links. **4 UI tests** (XCUITest) on canned data.
+- **Measured performance:** XCTest metrics for launch, scroll memory and each image-cache level; a memory hit costs ~17 µs vs ~7.6 ms from disk (simulator numbers, [docs/PERFORMANCE.md](docs/PERFORMANCE.md)).
 - **CI:** swift-format lint + unit and UI tests on every push.
 
-Later: offline support, episode tracking, widgets, notifications, deep links. Full plan in [docs/ROADMAP.md](docs/ROADMAP.md).
+Later: iPad and landscape layouts, a home-screen widget, TestFlight. Full plan in [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Architecture
 
@@ -90,6 +91,7 @@ Minimum target: iOS 18 ([ADR 0005](docs/adr/0005-ios-18-and-xcodegen.md)). Proje
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Module diagram, feed loading sequence, concurrency model, deep links |
 | [docs/PRODUCT.md](docs/PRODUCT.md) | Problem, users, MVP scope, screens, what's out of scope |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Milestones and the engineering checklist |
+| [docs/PERFORMANCE.md](docs/PERFORMANCE.md) | Launch, scroll and image-cache measurements, and how to rerun them |
 | [docs/DEVLOG.md](docs/DEVLOG.md) | Dated log of every work session |
 | [docs/adr/](docs/adr/) | Architecture Decision Records |
 | [Figma: MVP v0.1 screens](https://www.figma.com/design/XDV0KDQZaAJM0Gkda3pgAT) | Screen mockups, color variables and base components |

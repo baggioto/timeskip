@@ -3,7 +3,12 @@
 
     /// Canned data for SwiftUI previews and UI tests, so they run without a token or a network.
     public nonisolated struct PreviewTMDBService: TMDBService {
-        public init() {}
+        private let feedPages: Int
+
+        /// `feedPages` > 1 serves a long, paginated Trending feed (20 titles a page), for scroll performance tests.
+        public init(feedPages: Int = 1) {
+            self.feedPages = feedPages
+        }
 
         public static let sample: [Title] = [
             Title(
@@ -21,7 +26,19 @@
         ]
 
         public func trending(_ window: TimeWindow, page: Int) async throws(APIError) -> Page<Title> {
-            Page(items: Self.sample, page: 1, totalPages: 1)
+            guard feedPages > 1 else { return Page(items: Self.sample, page: 1, totalPages: 1) }
+            return Page(items: Self.feed(page: page), page: page, totalPages: feedPages)
+        }
+
+        static func feed(page: Int) -> [Title] {
+            (0..<20).map { index in
+                let base = sample[index % sample.count]
+                let number = (page - 1) * 20 + index + 1
+                return Title(
+                    id: TitleID(mediaType: base.id.mediaType, tmdbID: 1000 + number), name: "\(base.name) \(number)",
+                    overview: base.overview, posterPath: nil, backdropPath: nil, voteAverage: base.voteAverage,
+                    releaseDate: base.releaseDate)
+            }
         }
 
         public func search(_ query: String, page: Int) async throws(APIError) -> Page<Title> {

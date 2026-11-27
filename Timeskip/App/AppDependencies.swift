@@ -31,7 +31,9 @@ final class AppDependencies {
     static func live(bundle: Bundle = .main, process: ProcessInfo = .processInfo) -> AppDependencies {
         // UI tests ask for canned data; unit tests run inside the app and must not touch the real store.
         let isUnitTestHost = process.environment["XCTestConfigurationFilePath"] != nil
-        if process.arguments.contains(uiTestingArgument) || isUnitTestHost { return uiTesting() }
+        if process.arguments.contains(uiTestingArgument) || isUnitTestHost {
+            return uiTesting(feedPages: process.arguments.contains(largeFeedArgument) ? 10 : 1)
+        }
 
         let service: any TMDBService =
             AppConfig.fromBundle(bundle)
@@ -47,11 +49,13 @@ final class AppDependencies {
     }
 
     static let uiTestingArgument = "-ui-testing"
+    /// With `-ui-testing`: a 10-page Trending feed, for the scroll performance test.
+    static let largeFeedArgument = "-ui-testing-large-feed"
 
     /// Canned data, nothing persisted: every UI test starts from the same state, without a network.
-    private static func uiTesting() -> AppDependencies {
+    private static func uiTesting(feedPages: Int) -> AppDependencies {
         AppDependencies(
-            tmdb: PreviewTMDBService(),
+            tmdb: PreviewTMDBService(feedPages: feedPages),
             recentSearches: RecentSearchesStore(defaults: UserDefaults(suiteName: "ui-testing-\(UUID().uuidString)")!)
         )
     }
